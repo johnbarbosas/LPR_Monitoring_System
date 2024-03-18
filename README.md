@@ -1,2 +1,2 @@
-# lpr
+# LPR
 LPR
