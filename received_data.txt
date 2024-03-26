@@ -1,0 +1,46 @@
+Dados recebidos: 
+{
+'packetCounter': '126900804', 
+'capture_timestamp': '1711450406888', 
+'frame_timestamp': '1711450406888421',
+'capture_ts': '1711450406888000000',
+'datetime': '20240326 075326888',
+'plateText': 'FAJ7017',
+'plateUnicode': 'FAJ7017',
+'plateUTF8': 'FAJ7017',
+'plateASCII': 'FAJ7017',
+'plateCountry': 'BRA',
+'plateISO3166-2': '',
+'plateRegion': 'San Paulo',
+'plateRegionCode': '',
+'plateList': '',
+'plateListMode': '',
+'plateListDescription': '',
+'plateConfidence': '0.765035',
+'carState': 'new',
+'roiID': '1',
+'geotag': {'lat': 55.70421, 'lon': 13.19366},
+'imageType': 'plate',
+'plateImageType': 'jpeg',
+'plateImageSize': '0',
+'carMoveDirection': 'unknown',
+'timeProcessing': '0',
+'plateCoordinates': [168, 478, 190, 54],
+'plateCoordinatesRelative': [168, 478, 190, 54],
+'carID': '74462',
+'GEOtarget': 'Camera',
+'imagesURI': ['/local/fflprapp/tools.cgi?action=getImage&name=32/20240326075327_242385lp_FAJ7017_126900804.jpg',
+'/local/fflprapp/tools.cgi?action=getImage&name=33/20240326075327_243332roi_FAJ7017_126900804.jpg'],
+'imageFile': 'localdata/images/33/20240326075327_243332roi_FAJ7017_126900804.jpg',
+'imageFile2': 'localdata/images/32/20240326075327_242385lp_FAJ7017_126900804.jpg',
+'profileID': '1',
+'vehicle_info': {'view': 'front'},
+'camera_info': {'SerialNumber': 'B8A44F73E2FD', 'ProdShortName': 'AXIS P1465-LE', 'IPAddress': '172.16.5.131', 'MACAddress': 'B8:A4:4F:73:E2:FD'},
+'sensorProviderID': 'saida'
+}
+
+
+Timestamp: 2024-03-26 07:53:26
+Placa: FAJ7017
+Confiabilidade: 0.765035
+ID: saida
