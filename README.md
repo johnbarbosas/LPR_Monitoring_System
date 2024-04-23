@@ -15,7 +15,7 @@ A comunicação para uso da tvbox, que não possui interface gráfica, foi reali
 
 ![image](https://github.com/johnbarbosas/LPR/assets/115493461/76bdb8a6-e793-4fc0-b32e-b43768e29498)
 
-Figura 1 - Janela de configuação do PuTTY.
+***Figura 1*** - *Janela de configuação do PuTTY.*
 
 
 Devido a essas especificações foi escolhido o o SQLite para ser o gerenciador de banco de dados devido ser um sistema leve e de fácil configuração.
