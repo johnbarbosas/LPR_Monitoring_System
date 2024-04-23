@@ -29,7 +29,7 @@ s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 # AF_INET => IPv4
 # SOCK_STREAM => TCP
 
-host = '172.16.5.119'
+host = '192.168.0.22'
 port = 5000
 
 s.bind((host,port))
