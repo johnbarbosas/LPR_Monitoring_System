@@ -9,6 +9,7 @@ O projeto iniciou com o pedido de uma empresa para registrar a entrada e saída 
 
 ### Configuração da Tvbox
 A Tvbox está operando com o sistema operacional Armbain, com arquitetura ARMv7l que é uma arquitetura de 32 bits. A distribuição do sistema Linux é a Debian versão 11, informação esta que pode ser obtida digitando o comando ***lsb_release -a***. 
+
 A comunicação para uso da tvbox, que não possui interface gráfica, foi realizada utilizando o protocolo SSH por meio do software PuTTY que permite a comunicação SSH entre um dispositivo linux e um Windowns.
 
 
