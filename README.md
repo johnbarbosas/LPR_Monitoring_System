@@ -17,6 +17,7 @@ A comunicação para uso da tvbox, que não possui interface gráfica, foi reali
 
 ***Figura 1*** - *Janela de configuação do PuTTY.*
 
+Nesta janela no campo *Host Name (or Ip address)* é colocado o ip da tvbox na rede local, após isso basta pressionar *Open* que a comunicação será realizada.
 
 Devido a essas especificações foi escolhido o o SQLite para ser o gerenciador de banco de dados devido ser um sistema leve e de fácil configuração.
 
