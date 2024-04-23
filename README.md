@@ -8,9 +8,10 @@ O projeto iniciou com o pedido de uma empresa para registrar a entrada e saída 
 ## Arquitetura
 
 ### Configuração da Tvbox
-A Tvbox está operando com o sistema operacional Armbain, com arquitetura ARMv7l que é uma arquitetura de 32 bits. A distribuição do sistema Linux é a Debian versão 11, informação esta que pode ser obtida digitando o comando ***lsb_release -a***. 
+A Tvbox está operando com o sistema operacional Armbian, com arquitetura ARMv7l que é uma arquitetura de 32 bits. A distribuição do sistema Linux é a Debian versão 11, informação esta que pode ser obtida digitando o comando ***lsb_release -a***. 
 
-A comunicação para uso da tvbox, que não possui interface gráfica, foi realizada utilizando o protocolo SSH por meio do software PuTTY que permite a comunicação SSH entre um dispositivo linux e um Windowns.
+A comunicação para uso da tvbox, que não possui interface gráfica, foi realizada utilizando o protocolo SSH por meio do software PuTTY que permite a comunicação SSH entre um dispositivo linux e um Windowns. 
+![image](https://github.com/johnbarbosas/LPR/assets/115493461/76bdb8a6-e793-4fc0-b32e-b43768e29498)
 
 
 Devido a essas especificações foi escolhido o o SQLite para ser o gerenciador de banco de dados devido ser um sistema leve e de fácil configuração.
