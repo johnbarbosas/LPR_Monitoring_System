@@ -44,11 +44,3 @@ sqlite3 nome_do_banco_de_dados.db
     acuracia REAL,
     entrada_saida TEXT
   );
-
-
-
-
-
-
-
-
