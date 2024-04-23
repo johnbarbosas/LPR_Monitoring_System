@@ -5,7 +5,137 @@ O projeto iniciou com o pedido de uma empresa para registrar a entrada e saída 
 
 ## Objetivos
 
+O objetivo principal do projeto é receber os metadados da câmera LPR através de algum tipo de protocolo, que no caso, o mais viável foi o TCP. E através de um código python, tratar os dados, associar a placa do veículo ao nome do proprietário e então armazená-los em um banco de dados SQLite.
+
+Com os dados armazenados no SQLite, é possível acessá-los no PowerBI pela API [ODBC](https://en.wikipedia.org/wiki/Open_Database_Connectivity) (Open Database Connectivity)
+
 ## Arquitetura
+
+### Configurações câmera AXIS P1465-LE
+
+O próprio software embarcado que faz o LPR embarcado na câmera é tem nativo um configuração que envia todos os metadados por algum protocolo disponível, dentre eles estão:
+- TCP
+- HTTP POST
+- FTP
+
+![image](https://github.com/johnbarbosas/LPR/assets/89945583/5a0809d6-2d7b-4578-b97f-b8166bdb56b4)
+
+O melhor protocolo testado em conjunto com o python foi o TCP. Então foi colocado o IP do servidor seguido da porta utilizada: *172.16.5.119:5000*
+
+### Código Python para tratar os dados
+
+As bibliotecas de python utilizadas foram *socket*, *time*, *json*, *csv*, *os* e *datetime*.
+
+Para teste, o servidor TCP está salvando todos os dados em .csv, posteriormente esses dados serão salvos diretamente no banco de dados SQLite.
+
+A seguir temos a função para criar ou abrir o arquivo CSV correspondente ao dia atual (o código está criando um arquivo por dia).
+
+```
+# Função para criar ou abrir o arquivo CSV para o dia atual
+def obter_arquivo_csv():
+    hoje = datetime.now().strftime("%Y_%m_%d")
+    caminho_pasta_dados = 'dados'
+    caminho_arquivo_csv = os.path.join(caminho_pasta_dados, f'dados_{hoje}.csv')
+
+    # Cria a pasta se não existir
+    os.makedirs(caminho_pasta_dados, exist_ok=True)
+
+    # Se o arquivo não existir, cria um novo com cabeçalho
+    if not os.path.isfile(caminho_arquivo_csv):
+        with open(caminho_arquivo_csv, 'w', newline='') as arquivo_csv:
+            escritor_csv = csv.writer(arquivo_csv)
+            escritor_csv.writerow(['timestamp', 'placa', 'nome', 'confiabilidade', 'ID'])
+
+    return caminho_arquivo_csv
+```
+
+A função a seguir é para abrir o arquivo CSV com as placas e o nome do proprietário respectivo, para poder salvar o nome junto com as placas capturadas.
+
+
+```
+def nome_pela_placa(placa):
+    # Define o caminho do arquivo CSV
+    csv_file_path = 'test/placas.csv'
+
+    try:
+        # Abre o arquivo CSV
+        with open(csv_file_path, newline='') as csvfile:
+            # Lê o conteúdo do arquivo CSV
+            reader = csv.reader(csvfile)
+            # Itera sobre as linhas do arquivo
+            for row in reader:
+                # Verifica se a placa corresponde à placa da linha atual
+                if row[0] == placa:
+                    # Retorna o nome correspondente
+                    return row[1]
+    except FileNotFoundError:
+        print(f"Arquivo '{csv_file_path}' não encontrado.")
+    except Exception as e:
+        print(f"Ocorreu um erro ao abrir o arquivo CSV: {e}")
+
+    # Retorna None se a placa não for encontrada ou ocorrer um erro
+    return None
+```
+
+```
+s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
+# AF_INET => IPv4
+# SOCK_STREAM => TCP
+
+host = 'localhost'
+port = 5000
+
+s.bind((host,port))
+s.listen(5)
+
+print(f"Listening on {host}:{port}")
+
+while True:
+    clientsocket, address = s.accept()
+    #print(f"Connection from {address} has been established!")
+    #msg = "Welcome to the server!"
+
+    try:
+        dados = clientsocket.recv(4096)
+        data = json.loads(dados.decode('utf-8'))
+        #print(data)
+    except UnicodeDecodeError as e:
+        print(f"Erro de decodificação: {e}")
+        continue
+    except json.JSONDecodeError as e:
+        print(f"Erro ao decodificar JSON: {e}")
+        continue
+
+    
+    #print(f"Dados recebidos: {data}")
+
+    print(f"\n")
+
+    ajuste_fuso_horario = timedelta(hours=-3)
+
+    hora = int(data["capture_timestamp"]) / 1000.0
+    hora = datetime.utcfromtimestamp(hora) + ajuste_fuso_horario
+    hora = hora.strftime('%Y-%m-%d %H:%M:%S')
+
+    nome = nome_pela_placa(data["plateASCII"])
+
+    print("Timestamp:", hora)
+    print("Placa:", data["plateASCII"])
+    print("Nome:", nome)
+    print("Confiabilidade:", data["plateConfidence"])
+    print("ID:", data["sensorProviderID"])
+
+    # Obtem o caminho do arquivo CSV para o dia atual
+    caminho_csv = obter_arquivo_csv()
+
+    # Adiciona as informações ao arquivo CSV
+    with open(caminho_csv, 'a', newline='') as arquivo_csv:
+        escritor_csv = csv.writer(arquivo_csv)
+        escritor_csv.writerow([hora, data["plateASCII"], nome, data["plateConfidence"], data["sensorProviderID"]])
+        print("Escrito no CSV!")
+```
+
 
 ### Configuração da Tvbox
 A Tvbox está operando com o sistema operacional Armbian, com arquitetura ARMv7l que é uma arquitetura de 32 bits. A distribuição do sistema Linux é a Debian versão 11, informação esta que pode ser obtida digitando o comando ***lsb_release -a***. 
