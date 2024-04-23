@@ -11,6 +11,8 @@ Com os dados armazenados no SQLite, é possível acessá-los no PowerBI pela API
 
 ## Arquitetura
 
+![arquitetura](https://github.com/johnbarbosas/LPR/assets/89945583/b82b8857-0f06-47ee-9559-cbfb570cfa07)
+
 ### Configurações câmera AXIS P1465-LE
 
 O próprio software embarcado que faz o LPR embarcado na câmera é tem nativo um configuração que envia todos os metadados por algum protocolo disponível, dentre eles estão:
