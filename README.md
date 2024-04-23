@@ -7,5 +7,10 @@ O projeto iniciou com o pedido de uma empresa para registrar a entrada e saída 
 
 ## Arquitetura
 
+### Configuração da Tvbox
+A Tvbox está operando com o sistema operacional Armbain, com arquitetura ARMv7l que é uma arquitetura de 32 bits. Devido a essas especificações foi escolhido o o SQLite para ser o gerenciador de banco de dados devido ser um sistema leve e de fácil configuração.
+## Manual de Instalação e Configuração
+
+
 ## Manual de Instalação e Configuração
 
