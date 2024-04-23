@@ -32,10 +32,10 @@ Devido a essas especificações foi escolhido o SQLite para ser o gerenciador de
 
 - Criando o banco de dados: 
 ```
-sqlite3 nome_do_banco_de_dados.db
+   sqlite3 nome_do_banco_de_dados.db
 ```
 
-- Criar a tabela de dados:
+- Criação da tabela de dados:
   ```
   CREATE TABLE IF NOT EXISTS dados_placas (
     data TEXT,
