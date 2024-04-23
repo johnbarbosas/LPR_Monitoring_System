@@ -52,7 +52,12 @@ Após a intalaçãodo banco de dados, será precisa criar um scrip em python res
 
 Dentro desse diretório será preciso adicionar uma permissão para o python, seguinte o seguinte código:
 
-```chmod +x /opt/scripts/coletor_dados.py```
+```
+  chmod +x /opt/scripts/coletor_dados.py
+  ```
 
-Para a tvbox conseguir receber esses dados é preciso instalar o Flask que é responsável por criar o sevidor web. ```pip install Flask```
-
+Para a tvbox conseguir receber esses dados é preciso instalar o Flask que é responsável por criar o sevidor web. 
+  ```
+    pip install Flask
+```
+ddf
