@@ -60,4 +60,33 @@ Para a tvbox conseguir receber esses dados é preciso instalar o Flask que é re
   ```
     pip install Flask
 ```
-ddf
+Dentro desta pasta que conterá o script crie um arquivo de texto com o seguinte código em python:
+```
+from flask import Flask, request
+import sqlite3
+from datetime import datetime
+
+app = Flask(__name__)
+
+@app.route('/', methods=['POST'])
+def receber_dados():
+    dados = request.json
+    if dados:
+        try:
+            conn = sqlite3.connect('dados.db')
+            cursor = conn.cursor()
+            hora_atual = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+            cursor.execute("INSERT INTO dados_placas (placa, horario) VALUES (?, ?)",
+                           (dados['plateASCII'], hora_atual))
+            conn.commit()
+            conn.close()
+            return "Dados recebidos e salvos com sucesso!\n"
+        except Exception as e:
+            return f"Erro ao processar os dados: {str(e)}\n"
+    else:
+        return "Nenhum dado recebido.\n"
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=5000)
+```
+Esse código recebe a os dados na porta 5000;
