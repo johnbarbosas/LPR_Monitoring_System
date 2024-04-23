@@ -228,7 +228,7 @@ Na máquina Windowns onde encontra-se o CSV na mesma pasta que ele foi criado um
 
 Código python para o Windowns:
 ```
-    import csv
+import csv
 import os
 import requests
 import json
