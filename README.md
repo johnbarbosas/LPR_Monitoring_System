@@ -194,7 +194,7 @@ Para a tvbox conseguir receber esses dados é preciso instalar o Flask que é re
   
     pip install Flask
 
-Dentro desta pasta que conterá o script crie um arquivo de texto com o seguinte código em python:
+Dentro desta pasta que conterá o script crie um arquivo de texto com o seguinte código em python com a extensão .py:
 ```
 #!/usr/bin/env python3
 from flask import Flask, request
@@ -281,3 +281,8 @@ for dados_linha in dados_csv:
         print("Erro ao conectar ao servidor:", e)
 ```
 
+Com o banco criado, e os scripts prontos o servidor Flasky deve ser inicializado, para isso, a tvbox precisa estar no diretório do código Flasky.py. Dentro do diretório dê o seguinte comando:
+
+```
+sudo systemctl start flask_app
+```
