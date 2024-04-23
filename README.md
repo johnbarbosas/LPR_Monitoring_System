@@ -20,8 +20,12 @@ A comunicação para uso da tvbox, que não possui interface gráfica, foi reali
 Nesta janela no campo *Host Name (or Ip address)* é colocado o ip da tvbox na rede local, após isso basta pressionar *Open* que a comunicação será realizada.
 
 Devido a essas especificações foi escolhido o SQLite para ser o gerenciador de banco de dados devido ser um sistema leve, fácil configuração e por atender a especificação de suportar arquiteturas de 32bits.
-#### Instalação do SQLite
 
+#### Instalação do SQLite e criação do banco de dados
+- Item 1 Instalação do SQLite:
+- Item 2 Criando um novo banco de dados
+- Item 3 Criando o banco de dados
+- Item 4 Verificação de a tabela foi criada corretamente
 
 ## Manual de Instalação e Configuração
 
