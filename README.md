@@ -12,7 +12,8 @@ A Tvbox está operando com o sistema operacional Armbian, com arquitetura ARMv7l
 
 A comunicação para uso da tvbox, que não possui interface gráfica, foi realizada utilizando o protocolo SSH por meio do software PuTTY, figura 1, que permite a comunicação SSH entre um dispositivo linux e um Windowns. 
 ![image](https://github.com/johnbarbosas/LPR/assets/115493461/76bdb8a6-e793-4fc0-b32e-b43768e29498)
-FIgura 1 - Janela de configuação do PuTTY.
+
+Figura 1 - Janela de configuação do PuTTY.
 
 
 Devido a essas especificações foi escolhido o o SQLite para ser o gerenciador de banco de dados devido ser um sistema leve e de fácil configuração.
