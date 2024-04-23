@@ -44,3 +44,9 @@ Devido a essas especificações foi escolhido o SQLite para ser o gerenciador de
     acuracia REAL,
     entrada_saida TEXT
   );
+
+Para saber se a tabela foi criada corretamente utiliza o código .schema nome_do_banco_de_dados.
+```
+  .schema dados_placas
+
+
