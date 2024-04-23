@@ -25,7 +25,6 @@ Devido a essas especificações foi escolhido o SQLite para ser o gerenciador de
 - Instalação do SQLite:
   ```
   sudo apt-get install sqlite3
-  }
   ´´´
 
 - Criando um novo banco de dados
