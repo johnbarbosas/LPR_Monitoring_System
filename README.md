@@ -192,6 +192,7 @@ Para a tvbox conseguir receber esses dados é preciso instalar o Flask que é re
 ```
 Dentro desta pasta que conterá o script crie um arquivo de texto com o seguinte código em python:
 ```
+#!/usr/bin/env python3
 from flask import Flask, request
 import sqlite3
 from datetime import datetime
