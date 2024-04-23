@@ -51,7 +51,8 @@ Para saber se a tabela foi criada corretamente utiliza o código .schema nome_do
 Após a intalaçãodo banco de dados, será precisa criar um scrip em python responsável por criar um servidor web e receber os dados a serem armazenados. Para isso crie uma pasta em um diretório diferente do banco de dados.
 
 Dentro desse diretório será preciso adicionar uma permissão para o python, seguinte o seguinte código:
+
 ```chmod +x /opt/scripts/coletor_dados.py```
 
-
+Para a tvbox conseguir receber esses dados é preciso instalar o Flask que é responsável por criar o sevidor web. ```pip install Flask```
 
