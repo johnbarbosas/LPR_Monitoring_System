@@ -26,12 +26,13 @@ Devido a essas especificações foi escolhido o SQLite para ser o gerenciador de
   ```
   sudo apt-get install sqlite3
 
-- Criando um novo banco de dados
-- Criando o banco de dados
-- Verificação de a tabela foi criada corretamente
+- Criando um novo banco de dados: Caminho até o local de criação do banco de dados.
+  ```
+  cd /caminho/para/o/diretorio
 
-## Manual de Instalação e Configuração
+- Criando o banco de dados: 
+```
+sqlite3 nome_do_banco_de_dados.db
 
 
-## Manual de Instalação e Configuração
 
