@@ -23,6 +23,8 @@ Devido a essas especificações foi escolhido o SQLite para ser o gerenciador de
 
 #### Instalação do SQLite e criação do banco de dados
 - Instalação do SQLite:
+'' 'sudo apt-get install sqlite3' ''
+
 - Criando um novo banco de dados
 - Criando o banco de dados
 - Verificação de a tabela foi criada corretamente
