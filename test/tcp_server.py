@@ -1,49 +1,60 @@
 import socket
-import time
 import json
 import csv
 import os
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
+from influxdb_client import InfluxDBClient, Point, WritePrecision
+from influxdb_client.client.write_api import SYNCHRONOUS
 
-# Função para criar ou abrir o arquivo CSV para o dia atual
-def obter_arquivo_csv():
-    hoje = datetime.now().strftime("%Y_%m_%d")
-    caminho_pasta_dados = 'dados'
-    caminho_arquivo_csv = os.path.join(caminho_pasta_dados, f'dados_{hoje}.csv')
+# Function to create or open the CSV file for the current day
+def get_csv_file():
+    today = datetime.now().strftime("%Y_%m_%d")
+    data_folder_path = 'data'
+    csv_file_path = os.path.join(data_folder_path, f'data_{today}.csv')
 
-    # Cria a pasta se não existir
-    os.makedirs(caminho_pasta_dados, exist_ok=True)
+    # Create the folder if it does not exist
+    os.makedirs(data_folder_path, exist_ok=True)
 
-    # Se o arquivo não existir, cria um novo com cabeçalho
-    if not os.path.isfile(caminho_arquivo_csv):
-        with open(caminho_arquivo_csv, 'w', newline='') as arquivo_csv:
-            escritor_csv = csv.writer(arquivo_csv)
-            escritor_csv.writerow(['timestamp', 'placa', 'nome', 'confiabilidade', 'ID'])
+    # If the file does not exist, create a new one with headers
+    if not os.path.isfile(csv_file_path):
+        with open(csv_file_path, 'w', newline='') as csv_file:
+            csv_writer = csv.writer(csv_file)
+            csv_writer.writerow(['timestamp', 'license_plate', 'name', 'confidence', 'ID'])
 
-    return caminho_arquivo_csv
+    return csv_file_path
 
-def nome_pela_placa(placa):
-    # Define o caminho do arquivo CSV
-    csv_file_path = 'test/placas.csv'
+def get_name_by_license_plate(license_plate):
+    # Define the path to the CSV file
+    csv_file_path = 'placas.csv'
 
     try:
-        # Abre o arquivo CSV
+        # Open the CSV file
         with open(csv_file_path, newline='') as csvfile:
-            # Lê o conteúdo do arquivo CSV
+            # Read the contents of the CSV file
             reader = csv.reader(csvfile)
-            # Itera sobre as linhas do arquivo
+            # Iterate over the rows in the file
             for row in reader:
-                # Verifica se a placa corresponde à placa da linha atual
-                if row[0] == placa:
-                    # Retorna o nome correspondente
+                # Check if the license plate matches the current row
+                if row[0] == license_plate:
+                    # Return the corresponding name
                     return row[1]
     except FileNotFoundError:
-        print(f"Arquivo '{csv_file_path}' não encontrado.")
+        print(f"File '{csv_file_path}' not found.")
     except Exception as e:
-        print(f"Ocorreu um erro ao abrir o arquivo CSV: {e}")
+        print(f"An error occurred while opening the CSV file: {e}")
 
-    # Retorna None se a placa não for encontrada ou ocorrer um erro
+    # Return None if the license plate is not found or an error occurs
     return None
+
+# InfluxDB configuration
+INFLUXDB_URL = "https://us-east-1-1.aws.cloud2.influxdata.com"
+INFLUXDB_TOKEN = "1kWhejX1FGCKDYPyerc26Pex2_xGbH_kxHLHgjxmC_1nt5reBsmfK4uaZ5muhjkSb5dm2qmKlUYrlWFx4ntIJw=="
+INFLUXDB_ORG = "184fa17bc689338c"
+INFLUXDB_BUCKET = "lpr"
+
+client = InfluxDBClient(url=INFLUXDB_URL, token=INFLUXDB_TOKEN, org=INFLUXDB_ORG)
+write_api = client.write_api(write_options=SYNCHRONOUS)
+query_api = client.query_api()
 
 HEADERSIZE = 10
 
@@ -55,51 +66,80 @@ s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 host = 'localhost'
 port = 5000
 
-s.bind((host,port))
+s.bind((host, port))
 s.listen(5)
 
 print(f"Listening on {host}:{port}")
 
 while True:
     clientsocket, address = s.accept()
-    #print(f"Connection from {address} has been established!")
-    #msg = "Welcome to the server!"
 
     try:
-        dados = clientsocket.recv(4096)
-        data = json.loads(dados.decode('utf-8'))
-        #print(data)
+        data = clientsocket.recv(4096)
+        message = json.loads(data.decode('utf-8'))
     except UnicodeDecodeError as e:
-        print(f"Erro de decodificação: {e}")
+        print(f"Decoding error: {e}")
         continue
     except json.JSONDecodeError as e:
-        print(f"Erro ao decodificar JSON: {e}")
+        print(f"JSON decoding error: {e}")
         continue
 
-    
-    #print(f"Dados recebidos: {data}")
+    timezone_adjustment = timedelta(hours=-3)
 
-    print(f"\n")
+    timestamp = int(message["capture_timestamp"]) / 1000.0
+    timestamp = datetime.fromtimestamp(timestamp, tz=timezone.utc) + timezone_adjustment
+    timestamp_str = timestamp.strftime('%Y-%m-%d %H:%M:%S')
 
-    ajuste_fuso_horario = timedelta(hours=-3)
+    license_plate = message["plateASCII"]
+    name = get_name_by_license_plate(license_plate)
+    confidence = message["plateConfidence"]
+    camera_id = message["sensorProviderID"]
 
-    hora = int(data["capture_timestamp"]) / 1000.0
-    hora = datetime.utcfromtimestamp(hora) + ajuste_fuso_horario
-    hora = hora.strftime('%Y-%m-%d %H:%M:%S')
+    print(f"\nTimestamp: {timestamp_str}")
+    print(f"License Plate: {license_plate}")
+    print(f"Name: {name}")
+    print(f"Confidence: {confidence}")
+    print(f"ID: {camera_id}")
 
-    nome = nome_pela_placa(data["plateASCII"])
+    # Get the CSV file path for the current day
+    csv_file_path = get_csv_file()
 
-    print("Timestamp:", hora)
-    print("Placa:", data["plateASCII"])
-    print("Nome:", nome)
-    print("Confiabilidade:", data["plateConfidence"])
-    print("ID:", data["sensorProviderID"])
+    # Add the information to the CSV file
+    with open(csv_file_path, 'a', newline='') as csv_file:
+        csv_writer = csv.writer(csv_file)
+        csv_writer.writerow([timestamp_str, license_plate, name, confidence, camera_id])
+        print("Written to CSV!")
 
-    # Obtem o caminho do arquivo CSV para o dia atual
-    caminho_csv = obter_arquivo_csv()
+    # Write to InfluxDB
+    point = Point("vehicle_log")\
+        .tag("license_plate", license_plate)\
+        .tag("name", name)\
+        .field("confidence", confidence)\
+        .field("ID", camera_id)\
+        .time(timestamp, WritePrecision.NS)
 
-    # Adiciona as informações ao arquivo CSV
-    with open(caminho_csv, 'a', newline='') as arquivo_csv:
-        escritor_csv = csv.writer(arquivo_csv)
-        escritor_csv.writerow([hora, data["plateASCII"], nome, data["plateConfidence"], data["sensorProviderID"]])
-        print("Escrito no CSV!")
+    write_api.write(bucket=INFLUXDB_BUCKET, org=INFLUXDB_ORG, record=point)
+    print("Written to InfluxDB!")
+
+    # Check if the message is from an exit camera
+    if "exit" in camera_id.lower():
+        query = f'''
+        from(bucket: "{INFLUXDB_BUCKET}")
+          |> range(start: -30d)
+          |> filter(fn: (r) => r._measurement == "vehicle_log" and r.license_plate == "{license_plate}" and r.ID =~ /entry/)
+          |> sort(columns: ["_time"], desc: true)
+          |> limit(n: 1)
+        '''
+        tables = query_api.query(query, org=INFLUXDB_ORG)
+
+        if tables:
+            last_entry_time = None
+            for table in tables:
+                for record in table.records:
+                    last_entry_time = record.get_time()
+
+            if last_entry_time:
+                duration = timestamp - last_entry_time
+                hours, remainder = divmod(duration.total_seconds(), 3600)
+                minutes, seconds = divmod(remainder, 60)
+                print(f"Vehicle {license_plate} stayed for {int(hours)} hours, {int(minutes)} minutes, and {int(seconds)} seconds.")

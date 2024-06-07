@@ -9,6 +9,9 @@ def get_random_plate():
         reader = csv.reader(file)
         plates = [row[0] for row in reader]
         return random.choice(plates)
+    
+def get_random_ID():
+    return random.choice(["entry","exit"])
 
 def generate_notification():
     notification = {
@@ -50,7 +53,7 @@ def generate_notification():
         'profileID': '1',
         'vehicle_info': {'view': 'front'},
         'camera_info': {'SerialNumber': 'B8A44F73E2FD', 'ProdShortName': 'AXIS P1465-LE', 'IPAddress': '172.16.5.131', 'MACAddress': 'B8:A4:4F:73:E2:FD'},
-        'sensorProviderID': 'saida'
+        'sensorProviderID': get_random_ID()
     }
 
     notification['plateASCII'] = notification['plateText'][:7]  # obtendo os primeiros 7 caracteres da placa
