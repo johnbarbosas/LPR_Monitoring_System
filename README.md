@@ -73,10 +73,11 @@ Due to these specifications, SQLite was chosen as the database manager because i
     entrada_saida TEXT,
     permanencia TEXT
   ); 
-Para saber se a tabela foi criada corretamente utiliza o código .schema nome_do_banco_de_dados.
-```
-  .schema dados_placas
-```
+Para saber se a tabela foi criada corretamente pode-se utiilizar o comando _DESCRIBE *nome_do_banco*_;
+;_.
+```DESCRIBE dados_placas; ```
+
+
 Após a intalaçãodo banco de dados, será precisa criar um scrip em python responsável por criar um servidor web e receber os dados a serem armazenados. Para isso crie uma pasta em um diretório diferente do banco de dados.
 
 Dentro desse diretório será preciso adicionar uma permissão para o python, seguinte o seguinte código:
