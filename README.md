@@ -45,10 +45,11 @@ In this window, in the Host Name (or IP address) field, enter the IP of the TV b
 Due to these specifications, SQLite was chosen as the database manager because it is a lightweight system, easy to configure, and supports 32-bit architectures.
 
 #### Installing MariaDB and Creating the Database
-- Instalattion of MariaDB:
+Instalattion of MariaDB:
   ```
     sudo apt install mariadb-server
-- Após a instalação é preciso configurar o MariaDB para melhorar a sua segunça, para isso use o comando _**sudo mysql_secure_installation**_. Com esse comando é possivél definir a senha de root para utilizar o gerenciador do banco, remover usuários anônimos, desabilitação de login remoto, remover banco de dados _test_.
+```
+Após a instalação é preciso configurar o MariaDB para melhorar a sua segunça, para isso use o comando _**sudo mysql_secure_installation**_. Com esse comando é possivél definir a senha de root para utilizar o gerenciador do banco, remover usuários anônimos, desabilitação de login remoto, remover banco de dados _test_.
   
 1. _Senha root:_ Senha necessária para poder realizar a edições de administrador.
 
@@ -58,29 +59,29 @@ Due to these specifications, SQLite was chosen as the database manager because i
 
 4. _Banco de dados teste:_ Por padrão o MariaDB possui um banco para teste que pode ser excluido ou mantido.
 
-- Recomenda-se des
+Recomenda-se des
   ``` sudo mysql_secure_installation```
 
-- Acessando o MariaDB:
+Acessando o MariaDB:
   ```
     sudo mysql -u root -p
   ```
 
   
-- Nesta etapa será solicitado a senha criada para o MariaDB. Após essa etapa pra criar o banco de dados insira o comando _CREATE DATABASE **nome_do_banco**;_.
+Nesta etapa será solicitado a senha criada para o MariaDB. Após essa etapa pra criar o banco de dados insira o comando _CREATE DATABASE **nome_do_banco**;_.
   
   ```
     CREATE DATABASE dados_placas;
   ```
 
   
-- Com o banco de dados criado é necessário direcionar ao gerenciado do banco de dados qual o banco ele deve usar. Utilize o comando _USE *nome_do_banco*_:
+Com o banco de dados criado é necessário direcionar ao gerenciado do banco de dados qual o banco ele deve usar. Utilize o comando _USE *nome_do_banco*_:
   
 ```
     USE dados_placas;
 ```
 
-- Criação da tabela de dados:
+Criação da tabela de dados:
   ```
   CREATE TABLE dados_placas (
     data TEXT,
@@ -89,10 +90,9 @@ Due to these specifications, SQLite was chosen as the database manager because i
     acuracia REAL,
     entrada_saida TEXT,
     permanencia TEXT
-  ); 
+  );
+```
 Para saber se a tabela foi criada corretamente pode-se utiilizar o comando _DESCRIBE *nome_do_banco*;_.
 
-```
-  DESCRIBE dados_placas;
-```
+``` DESCRIBE dados_placas; ```
 
