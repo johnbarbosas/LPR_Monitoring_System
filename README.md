@@ -65,14 +65,14 @@ Due to these specifications, SQLite was chosen as the database manager because i
 
 - Criação da tabela de dados:
   ```
-  CREATE TABLE IF NOT EXISTS dados_placas (
+  CREATE TABLE dados_placas (
     data TEXT,
     hora TEXT,
     placa TEXT,
     acuracia REAL,
-    entrada_saida TEXT
+    entrada_saida TEXT,
     permanencia TEXT
-  );
+  ); 
 Para saber se a tabela foi criada corretamente utiliza o código .schema nome_do_banco_de_dados.
 ```
   .schema dados_placas
