@@ -75,7 +75,6 @@ Due to these specifications, SQLite was chosen as the database manager because i
   ); 
 Para saber se a tabela foi criada corretamente pode-se utiilizar o comando _DESCRIBE *nome_do_banco*;_.
 
-
 ```DESCRIBE dados_placas; ```
 
 
