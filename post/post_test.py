@@ -77,5 +77,11 @@ def send_notification(notification):
 if __name__ == "__main__":
     while True:
         notification = generate_notification()
-        send_notification(notification)
-        time.sleep(2)
+        try: 
+            send_notification(notification)
+
+        except ConnectionRefusedError as e:
+            print(f"Connection refused: {e}. Retrying in 5 seconds...")
+            time.sleep(5)  # Wait for 5 seconds before trying again  
+
+        time.sleep(5)
