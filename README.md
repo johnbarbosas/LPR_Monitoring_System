@@ -99,13 +99,14 @@ Com o banco de dados criado é necessário direcionar ao gerenciado do banco de 
 Criação da tabela de dados:
   ```
   CREATE TABLE dados_placas (
-    data TEXT,
-    hora TEXT,
-    placa TEXT,
-    acuracia REAL,
-    entrada_saida TEXT,
-    permanencia TEXT
-  );
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    timestamp DATETIME,
+    license_plate VARCHAR(255),
+    name VARCHAR(255),
+    confidence FLOAT,
+    camera_id VARCHAR(255),
+    duration VARCHAR(255)
+);
 ```
 Para saber se a tabela foi criada corretamente pode-se utiilizar o comando _DESCRIBE *nome_do_banco*;_.
 
