@@ -51,7 +51,7 @@ Instalattion of MariaDB:
   ```
     sudo apt install mariadb-server
 ```
-Após a instalação é preciso configurar o MariaDB para melhorar a sua segunça, para isso use o comando _**sudo mysql_secure_installation**_. Com esse comando é possivél editar as configurações de senha root, usuário anônimo, login remoto e banco de dados _test_.
+Após a instalação é preciso configurar o MariaDB para melhorar a sua segunça, para isso, utilize o comando _**sudo mysql_secure_installation**_. Com esse comando é possivél editar as configurações de senha root, usuário anônimo, login remoto e banco de dados _test_.
   
 1. _Senha root:_ Senha necessária para poder realizar a edições de administrador.
 
@@ -113,4 +113,4 @@ Para saber se a tabela foi criada corretamente pode-se utiilizar o comando _DESC
 ```
     DESCRIBE dados_placas;
 ```
-
+Para o recebimento dos dados enviados pela câmera de segurança, criou-se um código (_servidor.py_)
