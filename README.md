@@ -51,52 +51,53 @@ Instalattion of MariaDB:
   ```
     sudo apt install mariadb-server
 ```
-Após a instalação é preciso configurar o MariaDB para melhorar a sua segunça, para isso, utilize o comando _**sudo mysql_secure_installation**_. Com esse comando é possivél editar as configurações de senha root, usuário anônimo, login remoto e banco de dados _test_.
+After installation, it's necessary to configure MariaDB to enhance its security. To do this, use the command sudo mysql_secure_installation. With this command, you can edit settings for the root password, anonymous user, remote login, and the _test_ database.
   
-1. _Senha root:_ Senha necessária para poder realizar a edições de administrador.
+1. _Root password:_Password required to perform administrator edits.
 
-2. _Usuários Anônimos:_ Habilita ou desabilita a opção de usuários não cadastrados possam visualizar os dados contidos no banco.
+2. _Anonymous user:_ Enables or disables the option for non-registered users to view the data contained in the database.
 
-3. _Login remoto:_ Habilita ou desabilita a opção de poder editar o banco remotamente.
+3. _Remote login:_ Enables or disables the option to edit the database remotely.
 
-4. _Banco de dados teste:_ Por padrão o MariaDB possui um banco para teste denominado _test_ que pode ser excluido ou mantido.
+4. _Database test:_ By default, MariaDB comes with a test database named test which can be deleted or kept.
 
-Recomenda-se desabilitar os usuários anônimos, login remoto e criar uma senha root para maior seguraça dos dados. 
+
+It is recommended to disable anonymous users, remote login, and create a root password for enhanced data security. 
 
   ```
     sudo mysql_secure_installation
   ```
 
-Para acessar o gerenciador do MariaDB utilize o código abaixo onde o usuário será logado como administrador. 
+To access the MariaDB manager, use the code below where the user will be logged in as an administrator.
   ```
     sudo mysql -u root -p
   ```
-Caso queira criar um novo usuário entre como administrador e insira o comando abaixo editando os campos _usuário_ e _senha_.
+If you want to create a new user, log in as an administrator and enter the command below, editing the _username_ and _password_ fields.
 
 ```
 CREATE USER 'usuário'@'localhost' IDENTIFIED BY 'senha';
 ```
-Para dar as permissões a este novo usuário pode-se utilizar o código abaixo onde é concedido todas as permissões. É necessário já ter criado um banco de dados, pois esse usuário estará recebendo as permissões de um banco de dados
+To grant permissions to this new user, you can use the code below, where all permissions are granted. It is necessary to have already created a database, as this user will be receiving permissions for a specific database.
 
 ```
 GRANT ALL PRIVILEGES ON _nome_do_banco_.* TO 'usuário'@'localhost';';
 ```
 - Creating the Database:
 
-Nesta etapa será solicitado a senha criada para o MariaDB. Após essa etapa pra criar o banco de dados insira o comando _CREATE DATABASE **nome_do_banco**;_.
+At this stage, the password created for MariaDB will be requested. After this step, to create the database, enter the command _CREATE DATABASE **nome_do_banco**;_.
   
   ```
     CREATE DATABASE _nome_do_banco_;
   ```
 
   
-Com o banco de dados criado é necessário direcionar ao gerenciado do banco de dados qual o banco ele deve usar. Utilize o comando _USE *nome_do_banco*_:
+With the database created, it is necessary to direct the database manager to which database it should use. Use the command _USE *nome_do_banco*_:
   
 ```
     USE _nome_do_banco_;
 ```
 
-Criação da tabela de dados:
+Creation of the data table:
   ```
   CREATE TABLE _nome_do_banco_ (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -108,9 +109,9 @@ Criação da tabela de dados:
     duration VARCHAR(255)
 );
 ```
-Para saber se a tabela foi criada corretamente pode-se utiilizar o comando _DESCRIBE *nome_do_banco*;_.
+To verify if the table was created correctly, you can use the command _DESCRIBE *nome_do_banco*;_.
 
 ```
     DESCRIBE dados_placas;
 ```
-Para o recebimento dos dados enviados pela câmera de segurança, criou-se um código (_servidor.py_) que recebe uma mensagem padrão e compara com um csv de nomes registrados, faz o tratamento dos dados e envia-os para o banco de dados. 
+To receive data sent by the security camera, a code (_server.py_) has been created. It receives a standard message, compares it with a registered names CSV, processes the data, and sends it to the database.
