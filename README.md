@@ -68,7 +68,7 @@ Due to these specifications, SQLite was chosen as the database manager because i
 - Com o banco de dados criado é necessário direcionar ao gerenciado do banco de dados qual o banco ele deve usar. Utilize o comando _USE *nome_do_banco*_:
   
 ```
-  USE dados_placas;
+    USE dados_placas;
 ```
 
 - Criação da tabela de dados:
@@ -84,7 +84,7 @@ Due to these specifications, SQLite was chosen as the database manager because i
 Para saber se a tabela foi criada corretamente pode-se utiilizar o comando _DESCRIBE *nome_do_banco*;_.
 
 ```
-DESCRIBE dados_placas;
+    DESCRIBE dados_placas;
 ```
 
 
