@@ -59,9 +59,11 @@ Após a instalação é preciso configurar o MariaDB para melhorar a sua segunç
 
 4. _Banco de dados teste:_ Por padrão o MariaDB possui um banco para teste denominado _test_ que pode ser excluido ou mantido.
 
-Recomenda-se desabilitar os usuários anônimos, login remoto e criar uma senha root para maior seguraça dos dados.
+Recomenda-se desabilitar os usuários anônimos, login remoto e criar uma senha root para maior seguraça dos dados. 
 
-  ``` sudo mysql_secure_installation```
+  ```
+    sudo mysql_secure_installation
+  ```
 
 Acessando o MariaDB:
   ```
