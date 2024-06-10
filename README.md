@@ -49,9 +49,13 @@ Due to these specifications, SQLite was chosen as the database manager because i
   ```
     sudo apt install mariadb-server
 - Após a instalação é preciso configurar o MariaDB para melhorar a sua segunça, para isso use o comando _**sudo mysql_secure_installation**_. Com esse comando é possivél definir a senha de root para utilizar o gerenciador do banco, remover usuários anônimos, desabilitação de login remoto, remover banco de dados _test_.
+  
 1. _Senha root:_ Senha necessária para poder realizar a edições de administrador.
+
 2. _Usuários Anônimos:_ Habilita ou desabilita a opção de usuários não cadastrados possam visualizar os dados contidos no banco.
+
 3. _Login remoto:_ Habilita ou desabilita a opção de poder editar o banco remotamente.
+
 4. _Banco de dados teste:_ Por padrão o MariaDB possui um banco para teste que pode ser excluido ou mantido.
 
 - Recomenda-se des
