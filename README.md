@@ -113,4 +113,4 @@ Para saber se a tabela foi criada corretamente pode-se utiilizar o comando _DESC
 ```
     DESCRIBE dados_placas;
 ```
-Para o recebimento dos dados enviados pela câmera de segurança, criou-se um código (_servidor.py_)
+Para o recebimento dos dados enviados pela câmera de segurança, criou-se um código (_servidor.py_) que recebe uma mensagem padrão e compara com um csv de nomes registrados, faz o tratamento dos dados e envia-os para o banco de dados. 
