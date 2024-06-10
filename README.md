@@ -45,6 +45,8 @@ In this window, in the Host Name (or IP address) field, enter the IP of the TV b
 Due to these specifications, SQLite was chosen as the database manager because it is a lightweight system, easy to configure, and supports 32-bit architectures.
 
 #### Installing MariaDB and Creating the Database
+- Installing MariaDB:
+  
 Instalattion of MariaDB:
   ```
     sudo apt install mariadb-server
@@ -79,7 +81,7 @@ Para dar as permissões a este novo usuário pode-se utilizar o código abaixo o
 ```
 GRANT ALL PRIVILEGES ON _nome_do_banco_.* TO 'usuário'@'localhost';';
 ```
-- Criação do banco de dados:
+- Creating the Database:
 
 Nesta etapa será solicitado a senha criada para o MariaDB. Após essa etapa pra criar o banco de dados insira o comando _CREATE DATABASE **nome_do_banco**;_.
   
