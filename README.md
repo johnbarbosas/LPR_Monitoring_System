@@ -52,10 +52,13 @@ Due to these specifications, SQLite was chosen as the database manager because i
 - Criando um novo banco de dados: Caminho até o local de criação do banco de dados.
   ```
     cd /caminho/para/o/diretorio
-
-- Criando o banco de dados: 
+- Acessando o MariaDB:
+  ```sudo mysql -u root -p```
+- Nesta etapa será solicitado a senha criada para o MariaDB. Após essa etapa pra criar o banco de dados insira o comando _CREATE DATABASE **nome_do_banco**;_.
+  ```CREATE DATABASE dados_placas;```
+- Com o banco de dados criado é necessário direcionar ao gerenciado do banco de dados qual o banco ele deve usar. Utilize o comando _USE *nome_do_banco*_: 
 ```
-    sqlite3 nome_do_banco_de_dados.db
+    USE dados_placas;
 ```
 
 - Criação da tabela de dados:
