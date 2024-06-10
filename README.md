@@ -86,19 +86,19 @@ GRANT ALL PRIVILEGES ON _nome_do_banco_.* TO 'usuário'@'localhost';';
 Nesta etapa será solicitado a senha criada para o MariaDB. Após essa etapa pra criar o banco de dados insira o comando _CREATE DATABASE **nome_do_banco**;_.
   
   ```
-    CREATE DATABASE dados_placas;
+    CREATE DATABASE _nome_do_banco_;
   ```
 
   
 Com o banco de dados criado é necessário direcionar ao gerenciado do banco de dados qual o banco ele deve usar. Utilize o comando _USE *nome_do_banco*_:
   
 ```
-    USE dados_placas;
+    USE _nome_do_banco_;
 ```
 
 Criação da tabela de dados:
   ```
-  CREATE TABLE dados_placas (
+  CREATE TABLE _nome_do_banco_ (
     id INT AUTO_INCREMENT PRIMARY KEY,
     timestamp DATETIME,
     license_plate VARCHAR(255),
