@@ -65,12 +65,22 @@ Recomenda-se desabilitar os usuários anônimos, login remoto e criar uma senha 
     sudo mysql_secure_installation
   ```
 
-Acessando o MariaDB:
+Para acessar o gerenciador do MariaDB utilize o código abaixo onde o usuário será logado como administrador. 
   ```
     sudo mysql -u root -p
   ```
+Caso queira criar um novo usuário entre como administrador e insira o comando abaixo editando os campos _usuário_ e _senha_.
 
-  
+```
+CREATE USER 'usuário'@'localhost' IDENTIFIED BY 'senha';
+```
+Para dar as permissões a este novo usuário pode-se utilizar o código abaixo onde é concedido todas as permissões. É necessário já ter criado um banco de dados, pois esse usuário estará recebendo as permissões de um banco de dados
+
+```
+GRANT ALL PRIVILEGES ON _nome_do_banco_.* TO 'usuário'@'localhost';';
+```
+- Criação do banco de dados:
+
 Nesta etapa será solicitado a senha criada para o MariaDB. Após essa etapa pra criar o banco de dados insira o comando _CREATE DATABASE **nome_do_banco**;_.
   
   ```
