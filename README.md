@@ -10,7 +10,8 @@ With the data stored in SQLite, it can be accessed in PowerBI via the [ODBC](htt
 
 ## Architecture
 
-![architecture](https://github.com/johnbarbosas/LPR/assets/89945583/b82b8857-0f06-47ee-9559-cbfb570cfa07)
+![arquitetura](https://github.com/johnbarbosas/LPR_Monitoring_System/assets/89945583/e0243717-969d-4126-8f1f-a15a17836805)
+
 
 ### AXIS P1465-LE Camera Settings
 The embedded software that performs the LPR on the camera natively has a configuration that sends all metadata via an available protocol, including:
